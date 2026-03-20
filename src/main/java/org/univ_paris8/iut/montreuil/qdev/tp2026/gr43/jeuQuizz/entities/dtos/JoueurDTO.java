@@ -1,5 +1,7 @@
 package org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.entities.dtos;
 
+import org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.entities.enums.LangueEnum;
+
 /**
  * DTO représentant un joueur du jeu de Quizz.
  *
@@ -17,13 +19,13 @@ public class JoueurDTO {
     private String pseudo;
     private int anneeNaissance;
     private CentresInteretsDTO centresInterets;
-    private LangueDTO languePreferee;
+    private LangueEnum languePreferee;
 
     public JoueurDTO() {
     }
 
     public JoueurDTO(String prenom, String pseudo, int anneeNaissance,
-                     CentresInteretsDTO centresInterets, LangueDTO languePreferee) {
+                     CentresInteretsDTO centresInterets, LangueEnum languePreferee) {
         this.prenom = prenom;
         this.pseudo = pseudo;
         this.anneeNaissance = anneeNaissance;
@@ -63,11 +65,11 @@ public class JoueurDTO {
         this.centresInterets = centresInterets;
     }
 
-    public LangueDTO getLanguePreferee() {
+    public LangueEnum getLanguePreferee() {
         return languePreferee;
     }
 
-    public void setLanguePreferee(LangueDTO languePreferee) {
+    public void setLanguePreferee(LangueEnum languePreferee) {
         this.languePreferee = languePreferee;
     }
 
