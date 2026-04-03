@@ -5,37 +5,34 @@ import org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.util.exceptions.B
 import org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.util.exceptions.ConflictException;
 import org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.util.exceptions.InternalException;
 import org.univ_paris8.iut.montreuil.qdev.tp2026.gr43.jeuQuizz.util.exceptions.NotFoundException;
+
 import java.util.List;
 
-/**
- * Interface du service métier Joueur (SME).
- * Définit les opérations disponibles pour la gestion des joueurs.
- */
 public interface IJoueurService {
 
     /**
-     * Ajoute un nouveau joueur dans le système.
+     * Ajoute un nouveau joueur après validation de ses données.
      *
-     * @param nouveauJoueur DTO contenant les informations du joueur à créer
-     *                      (prénom, pseudo, année de naissance, centres d'intérêts, langue)
-     * @return JoueurDTO représentant le joueur nouvellement créé et validé
-     * @throws BadRequestException si une saisie est invalide :
-     *         - le pseudo commence par un chiffre
-     *         - l'année de naissance ne fait pas 4 chiffres
-     *         - le format des centres d'intérêts est incorrect (se termine par une virgule)
-     *         - l'id de langue n'est pas compris entre 1 et 5
-     * @throws ConflictException   si le pseudo existe déjà (le pseudo doit être unique)
-     * @throws InternalException   en cas d'erreur interne lors de la persistance
+     * @param nouveauJoueur le joueur à créer (prénom, pseudo, année de naissance,
+     *                      centres d'intérêts, langue)
+     * @return le JoueurDTO nouvellement créé et validé
+     * @throws BadRequestException si une erreur de saisie est détectée :
+     *         - pseudo commençant par un chiffre
+     *         - année de naissance ne faisant pas 4 caractères
+     *         - mauvais format pour les centres d'intérêts
+     *         - id de langue non compris entre 1 et 5
+     * @throws ConflictException   si le pseudo existe déjà en base
+     * @throws InternalException   en cas de problème côté serveur ou d'échec de la base de données
      */
     public JoueurDTO ajouterJoueur(JoueurDTO nouveauJoueur)
             throws BadRequestException, ConflictException, InternalException;
 
     /**
-     * Retourne la liste de tous les joueurs enregistrés, triés par ordre alphabétique de pseudo.
+     * Retourne la liste de tous les joueurs triée par ordre alphabétique de pseudo.
      *
-     * @return List&lt;JoueurDTO&gt; la liste triée des joueurs
-     * @throws NotFoundException si aucun joueur n'est enregistré
-     * @throws InternalException en cas d'anomalie lors de la récupération des données
+     * @return la liste des JoueurDTO triée alphabétiquement par pseudo
+     * @throws NotFoundException si la liste récupérée en base de données est vide
+     * @throws InternalException en cas de problème côté serveur ou d'anomalie de la base de données
      */
     public List<JoueurDTO> listerJoueurs()
             throws NotFoundException, InternalException;
